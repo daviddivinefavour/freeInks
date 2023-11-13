@@ -1,0 +1,8 @@
+node_modules
+dist
+
+# ignore log files
+logs
+
+# ignore credentials and environment secrets
+.env

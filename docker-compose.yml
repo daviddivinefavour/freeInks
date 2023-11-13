@@ -1,0 +1,14 @@
+version: '3'
+services:
+  db:
+    container_name: FreeInks
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: freeinks_dev
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: password
+    ports:
+      - '5433:5432'
+    volumes:
+      - ./volumes/FreeInks-data:/var/lib/postgresql/data
