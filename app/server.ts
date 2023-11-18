@@ -1,30 +1,31 @@
 import 'dotenv/config';
 import { createServer } from 'http';
 import app from './application';
+import winston from 'winston';
 
 const server = createServer(app);
 const { PORT, HOST } = process.env;
 
 server.listen(PORT, () => {
-  console.log(`Server running on ${HOST}:${PORT}`);
+  winston.info(`Server running on ${HOST}:${PORT}`);
 });
 
 // Graceful shutdown
 process.on('SIGINT', () => {
-  console.log('Shutting down server gracefully...');
+  winston.info('Shutting down server gracefully...');
   server.close(() => {
-    console.log('Server shut down.');
+    winston.info('Server shut down.');
     process.exit(0);
   });
 });
 
 // Error handling
 process.on('uncaughtException', err => {
-  console.error('Uncaught exception:', err);
+  winston.error('Uncaught exception:', err);
   process.exit(1);
 });
 
 process.on('unhandledRejection', (reason, promise) => {
-  console.error('Unhandled Rejection', reason);
+  winston.error('Unhandled Rejection', reason);
   process.exit(1);
 });

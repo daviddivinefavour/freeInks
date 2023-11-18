@@ -5,22 +5,17 @@
     "lib": ["esnext", "dom"],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "module": "CommonJS",
+    "module": "commonjs",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
     "rootDir": "./app",
     "moduleResolution": "node",
-    "baseUrl": "./",
     "allowJs": true,
     "noImplicitAny": true,
     "strictPropertyInitialization": false,
-       "paths": {
-      "*": ["node_modules/*"],
-      "@app": ["app/*"],
-    }
   },
-  "exclude": ["node_modules", "dist", "coverage","database"],
+  "exclude": ["node_modules", "dist", "coverage", "database"],
   "include": ["app"]
 }
