@@ -1,3 +1,6 @@
+import { Response } from 'express';
+import { THttpResponseWithEntity } from './types';
+
 const createResult = (isSuccess: boolean, data: any) => ({ isSuccess, ...data });
 
 export const createFailureResult = (err: string) =>
@@ -24,3 +27,6 @@ export const createSuccessResult = ({
     message,
     entity,
   });
+
+export const sendHttpResponse = (data: THttpResponseWithEntity, res: Response) =>
+  res.send({ status: data.status, title: data.title, message: data.message, entity: data.entity });

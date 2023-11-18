@@ -1,10 +1,4 @@
-type THttpResponse = {
-  status: number;
-  title: string;
-  message: string;
-};
-
-type THttpResponseWithEntity = THttpResponse & { entity?: Record<string, any> };
+import { THttpResponseWithEntity, THttpResponse } from './types';
 
 export const HTTP_200 = ({
   customMessage,
