@@ -16,6 +16,6 @@
     "noImplicitAny": true,
     "strictPropertyInitialization": false,
   },
-  "exclude": ["node_modules", "dist", "coverage", "database"],
+  "exclude": ["node_modules", "dist", "coverage", "database", "logs", "scripts", "tests"],
   "include": ["app"]
 }
