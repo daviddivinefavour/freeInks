@@ -1,7 +1,7 @@
 import express, { Express } from 'express';
 import cors, { CorsOptions } from 'cors';
-import routes from './routes/v1';
-import logMaster from './common/logger';
+import routes from '@app/routes/v1';
+import logMaster from '@app/common/logger';
 const app: Express = express();
 
 const whitelist = ['http://localhost:3003'];

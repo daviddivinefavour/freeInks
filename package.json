@@ -14,7 +14,7 @@
     "db:migrate:undo": "NODE_ENV=${npm_config_env}  && npx sequelize db:migrate:undo --env=${npm_config_env}",
     "db:seed": "NODE_ENV=${npm_config_env}  && npx sequelize db:seed:all --env=${npm_config_env}",
     "db:seed:undo": "NODE_ENV=${npm_config_env}  && npx sequelize db:seed:undo --env=${npm_config_env}",
-    "test": "mocha"
+    "test": "NODE_ENV=test mocha --check-leaks"
   },
   "repository": {
     "type": "git",

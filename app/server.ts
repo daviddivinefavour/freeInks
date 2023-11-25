@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import { createServer } from 'http';
-import app from './application';
+import app from '@app/application';
 import winston from 'winston';
 
 const server = createServer(app);

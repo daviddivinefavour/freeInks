@@ -1,5 +1,5 @@
 module.exports = {
-  require: 'ts-node/register',
+  require: ['ts-node/register', 'tsconfig-paths/register'],
   recursive: true,
   spec: 'tests/**/*.test.ts',
   project: './tsconfig.test.json',

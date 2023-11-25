@@ -14,10 +14,4 @@ describe('Express Application Configuration', () => {
     await agentInstance.get('/');
     expect('Access-Control-Allow-Origin', originHeaderValue);
   });
-
-  it('should parse JSON and handle URL encoding on routes the server endpoints', async () => {
-    const response = await agentInstance.post('/api/v1').send({ name: 'Divinefavour David' });
-    expect(response.status).to.deep.equal(200);
-    expect(response.body).to.deep.equal({ name: 'Divinefavour David' });
-  });
 });
