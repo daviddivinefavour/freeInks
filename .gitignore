@@ -6,3 +6,7 @@ logs
 
 # ignore credentials and environment secrets
 .env
+
+
+#dump for files that would be used later
+/dump

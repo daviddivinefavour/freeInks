@@ -6,7 +6,7 @@ const expect = chai.expect;
 const agentInstance = supertest.agent(app);
 const originHeaderValue = 'http://localhost:3003';
 
-describe('Express Application Configuration', () => {
+describe('Initiate express app', () => {
   before(() => {
     agentInstance.set('Origin', originHeaderValue); // sets headers before each request to server, to avoid cors error blocking connection
   });
