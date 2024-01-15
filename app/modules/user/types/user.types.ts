@@ -4,7 +4,7 @@ export type TCreateUserAttributes = {
   lastName: string;
   email: string;
   phoneNumber?: string;
-  isEmailVerified: boolean;
+  isEmailVerified?: boolean;
   verifiedAt?: string;
   status: EUserStatus;
   profileImageUrl?: string;

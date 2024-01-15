@@ -1,5 +1,8 @@
-import { Table, Column, Model } from 'sequelize-typescript';
+import { Table, Column, Model, BelongsToMany, DataType } from 'sequelize-typescript';
 import { EUserRole, EUserStatus } from '../types/user.types';
+import UserPermission from '@app/modules/permission/models/user-permission.model';
+import { TUserPermission } from '@app/modules/permission/types/permission.types';
+import Permission from '@app/modules/permission/models/permission.model';
 @Table({
   tableName: 'users',
   timestamps: true,
@@ -35,6 +38,9 @@ export default class User extends Model<User> {
   @Column
   role!: EUserRole;
 
-  @Column
+  @Column(DataType.DATE)
   deletedAt?: any;
+
+  @BelongsToMany(() => Permission, () => UserPermission)
+  permissions: TUserPermission[];
 }

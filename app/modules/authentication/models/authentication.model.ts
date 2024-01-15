@@ -1,5 +1,5 @@
 import { Table, Column, Model } from 'sequelize-typescript';
-import { TAuthenticatedUser } from '../types/authentication.types';
+import { EAuthenticatedUser } from '../types/authentication.types';
 @Table({
   tableName: 'authentications',
   timestamps: true,
@@ -12,7 +12,7 @@ export default class Authentication extends Model<Authentication> {
   password: string;
 
   @Column
-  authenticatedType: TAuthenticatedUser;
+  authenticatedType: EAuthenticatedUser;
 
   @Column
   authenticatedId!: string;

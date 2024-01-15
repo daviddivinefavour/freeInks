@@ -2,6 +2,7 @@ import 'dotenv/config';
 import { createServer } from 'http';
 import app from '@app/application';
 import winston from 'winston';
+import './config/database';
 
 const server = createServer(app);
 const { PORT, HOST } = process.env;

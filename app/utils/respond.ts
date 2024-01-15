@@ -1,32 +1,35 @@
 import { Response } from 'express';
-import { THttpResponseWithEntity } from './types';
+import { TFunctionResult, IHttpResponse } from './types';
 
-const createResult = (isSuccess: boolean, data: any) => ({ isSuccess, ...data });
+export const sendHttpResponse = <T>(data: IHttpResponse<T>, res: Response) =>
+  data.entity
+    ? res.send({ status: data.statusCode, title: data.title, message: data.message, entity: data.entity })
+    : res.send({ status: data.statusCode, title: data.title, message: data.message });
 
-export const createFailureResult = (err: string) =>
-  createResult(false, {
-    status: 422,
-    title: 'Oops something went wrong',
-    message: err,
-  });
-
-export const createSuccessResult = ({
+const returnResult = <T>({
   status,
-  title,
   message,
-  entity,
+  data,
 }: {
-  status: number;
-  title: string;
+  status: boolean;
   message: string;
-  entity?: Record<string, any>;
-}) =>
-  createResult(true, {
-    status,
-    title,
+  data: T;
+}): TFunctionResult<T> => ({
+  status,
+  message,
+  data,
+});
+
+export const passingResult = <T>(message: string, data: T) =>
+  returnResult({
+    status: true,
     message,
-    entity,
+    data,
   });
 
-export const sendHttpResponse = (data: THttpResponseWithEntity, res: Response) =>
-  res.send({ status: data.status, title: data.title, message: data.message, entity: data.entity });
+export const failingResult = (message: string) =>
+  returnResult({
+    status: false,
+    message,
+    data: null,
+  });

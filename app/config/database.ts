@@ -3,8 +3,6 @@ import { Sequelize } from 'sequelize-typescript';
 import { readdirSync, statSync } from 'fs';
 import * as path from 'path';
 
-// This file maps all models for the various modules in the application and returns it to sequelize for handling queries
-
 interface DBConfig {
   DB_NAME: string;
   DB_PASSWORD: string;

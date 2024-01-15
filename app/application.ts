@@ -4,7 +4,7 @@ import routes from '@app/routes/v1';
 import logMaster from '@app/common/logger';
 const app: Express = express();
 
-const whitelist = ['http://localhost:3003'];
+const whitelist = ['http://localhost:3003', '*'];
 
 const corsOptions: CorsOptions = {
   origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
