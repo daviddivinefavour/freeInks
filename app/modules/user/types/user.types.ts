@@ -11,6 +11,13 @@ export type TCreateUserAttributes = {
   role: EUserRole;
 };
 
+export interface ISignUpOptions {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
 export enum EUserStatus {
   ACTIVE = 'active',
   INACTIVE = 'inactive',

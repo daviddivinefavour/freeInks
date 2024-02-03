@@ -27,3 +27,9 @@ export interface IRequestWithUser extends Request {
     role?: EUserRole;
   };
 }
+
+// export interface IReturnFromService<T> {
+//   message: string;
+//   status: boolean;
+//   data?: T;
+// }

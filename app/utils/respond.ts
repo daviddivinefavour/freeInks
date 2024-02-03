@@ -3,8 +3,8 @@ import { TFunctionResult, IHttpResponse } from './types';
 
 export const sendHttpResponse = <T>(data: IHttpResponse<T>, res: Response) =>
   data.entity
-    ? res.send({ status: data.statusCode, title: data.title, message: data.message, entity: data.entity })
-    : res.send({ status: data.statusCode, title: data.title, message: data.message });
+    ? res.status(data.statusCode).send({ title: data.title, message: data.message, entity: data.entity })
+    : res.status(data.statusCode).send({ title: data.title, message: data.message });
 
 const returnResult = <T>({
   status,
@@ -31,5 +31,5 @@ export const failingResult = (message: string) =>
   returnResult({
     status: false,
     message,
-    data: null,
+    data: undefined,
   });
