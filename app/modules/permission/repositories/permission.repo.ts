@@ -1,3 +1,13 @@
+import { Op } from 'sequelize';
 import Permission from '../models/permission.model';
 
-export const GetPermissionsQuery = async (userId: string): Promise<Permission[]> => Permission.findAll();
+const GetPermissionsQuery = async (permissionNames: string[]): Promise<Permission[]> =>
+  Permission.findAll({
+    where: {
+      name: {
+        [Op.in]: permissionNames,
+      },
+    },
+  });
+
+export default { GetPermissionsQuery };

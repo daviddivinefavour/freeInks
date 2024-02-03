@@ -4,12 +4,14 @@ import { Express, Request, Response, NextFunction } from 'express';
 
 // import the route handlers for each module
 import authenticationRoutes from './authentication.routes';
+import userRoute from './user.routes';
 
 const routes = (app: Express) => {
   app.get('/api/v1/', (req: Request, res: Response) => sendHttpResponse(HTTP_204('Welcome to FreeInks'), res));
 
   // plug in the route handlers
   app.use('/api/v1/authenticate', authenticationRoutes);
+  app.use('/api/v1/user', userRoute);
 
   // handler for unknown routes
   app.all('*', (req: Request, res: Response) =>

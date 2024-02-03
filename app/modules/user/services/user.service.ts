@@ -1,6 +1,6 @@
-import { EUserRole, EUserStatus, ISignUpOptions, TCreateUserAttributes } from '../types/user.types';
+import { EUserRole, EUserStatus, ISignUpOptions } from '../types/user.types';
 import { failingResult, passingResult } from '@app/utils/respond';
-import { CreateUserQuery, DeleteUserQuery, SimpleFindOneUserQuery } from '../repositories/user.repo';
+import userRepo from '../repositories/user.repo';
 import { requestBodyValidator } from '@app/utils/validator';
 import { CreateUserSchema } from '../schemas/user.schema';
 import { v4 } from 'uuid';
@@ -10,10 +10,10 @@ const CreateUserService = async (createUserDto: ISignUpOptions, role: any) => {
   const validatedDto = await requestBodyValidator({ payload: createUserDto, schema: CreateUserSchema });
   if (!validatedDto.status) return failingResult(validatedDto.message);
 
-  const userExists = await SimpleFindOneUserQuery({ email: createUserDto.email });
+  const userExists = await userRepo.SimpleFindOneUserQuery({ email: createUserDto.email });
   if (userExists) return failingResult('User already exists.');
 
-  const user = await CreateUserQuery({
+  const user = await userRepo.CreateUserQuery({
     id: v4(),
     status: EUserStatus.INACTIVE,
     role: role === EUserRole.AUTHOR ? EUserRole.AUTHOR : EUserRole.READER,
@@ -25,9 +25,15 @@ const CreateUserService = async (createUserDto: ISignUpOptions, role: any) => {
 };
 
 const DeleteUserService = async (userId: string) => {
-  const deleted = await DeleteUserQuery(userId);
+  const deleted = await userRepo.DeleteUserQuery(userId);
   if (!deleted) return failingResult('An error occurred');
   return passingResult('Successfully deleted user.', deleted);
 };
 
-export default { CreateUserService, DeleteUserService };
+const GetUserService = async (userId: string) => {
+  const user = await userRepo.GetUserByIdQuery(userId);
+  if (!user) return failingResult('An error occurred');
+  return passingResult('Successfully fetched user data', user);
+};
+
+export default { CreateUserService, DeleteUserService, GetUserService };

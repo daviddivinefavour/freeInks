@@ -2,10 +2,10 @@ import Permission from '@app/modules/permission/models/permission.model';
 import User from '../models/user.model';
 import { TCreateUserAttributes } from '../types/user.types';
 
-export const CreateUserQuery = async (createUserDto: TCreateUserAttributes): Promise<User> =>
+const CreateUserQuery = async (createUserDto: TCreateUserAttributes): Promise<User> =>
   User.create(createUserDto as User);
 
-export const GetUserByIdQuery = async (userId: string): Promise<User | null> =>
+const GetUserByIdQuery = async (userId: string): Promise<User | null> =>
   User.findByPk(userId, {
     include: [
       {
@@ -17,7 +17,7 @@ export const GetUserByIdQuery = async (userId: string): Promise<User | null> =>
     ],
   });
 
-export const FindOneUserQuery = async (query: Partial<TCreateUserAttributes>): Promise<User | null> =>
+const FindOneUserQuery = async (query: Partial<TCreateUserAttributes>): Promise<User | null> =>
   User.findOne({
     where: { ...query },
     include: [
@@ -30,9 +30,11 @@ export const FindOneUserQuery = async (query: Partial<TCreateUserAttributes>): P
     ],
   });
 
-export const SimpleFindOneUserQuery = async (query: Partial<TCreateUserAttributes>): Promise<User | null> =>
+const SimpleFindOneUserQuery = async (query: Partial<TCreateUserAttributes>): Promise<User | null> =>
   User.findOne({
     where: { ...query },
   });
 
-export const DeleteUserQuery = async (userId: string) => User.destroy({ where: { id: userId } });
+const DeleteUserQuery = async (userId: string) => User.destroy({ where: { id: userId } });
+
+export default { CreateUserQuery, GetUserByIdQuery, FindOneUserQuery, SimpleFindOneUserQuery, DeleteUserQuery };

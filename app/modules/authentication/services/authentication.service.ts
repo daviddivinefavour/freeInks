@@ -1,17 +1,12 @@
-import { CreateUserSchema } from '@app/modules/user/schemas/user.schema';
-import { EUserStatus } from '@app/modules/user/types/user.types';
-import { requestBodyValidator } from '@app/utils/validator';
 import { v4 as uuid } from 'uuid';
-import { IUserRegistrationOptions } from '../types/authentication.types';
-import { HTTP_201, HTTP_422 } from '@app/utils/http-response';
-import { CreateAuthenticationQuery } from '../repositories/authentication.repo';
 import { EAuthenticatedUser } from '../types/authentication.types';
 import { hashString } from '@app/utils/helpers';
 import winston from 'winston';
 import { failingResult, passingResult } from '@app/utils/respond';
+import authenticationRepo from '../repositories/authentication.repo';
 
 const CreateUserAuthenticationService = async ({ userId, password }: { userId: string; password: string }) => {
-  const userAuth = await CreateAuthenticationQuery({
+  const userAuth = await authenticationRepo.CreateAuthenticationQuery({
     id: uuid(),
     authenticatedId: userId,
     authenticatedType: EAuthenticatedUser.CLIENT,
