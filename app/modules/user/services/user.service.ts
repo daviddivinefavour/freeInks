@@ -1,4 +1,4 @@
-import { EUserRole, EUserStatus, ISignUpOptions } from '../types/user.types';
+import { EUserRole, EUserStatus, ISignUpOptions, IUniqueUserProperties } from '../types/user.types';
 import { failingResult, passingResult } from '@app/utils/respond';
 import userRepo from '../repositories/user.repo';
 import { requestBodyValidator } from '@app/utils/validator';
@@ -30,10 +30,16 @@ const DeleteUserService = async (userId: string) => {
   return passingResult('Successfully deleted user.', deleted);
 };
 
-const GetUserService = async (userId: string) => {
+const GetUserByIdService = async (userId: string) => {
   const user = await userRepo.GetUserByIdQuery(userId);
   if (!user) return failingResult('An error occurred');
   return passingResult('Successfully fetched user data', user);
 };
 
-export default { CreateUserService, DeleteUserService, GetUserService };
+const FindOneUserService = async (query: Partial<IUniqueUserProperties>) => {
+  const user = await userRepo.FindOneUserQuery(query);
+  if (!user) return failingResult('An error occurred');
+  return passingResult('Successfully fetched user data', user);
+};
+
+export default { CreateUserService, DeleteUserService, GetUserByIdService, FindOneUserService };

@@ -1,4 +1,4 @@
-import { EUserRole } from '@app/modules/user/types/user.types';
+import { EUserRole, ISignUpOptions } from '@app/modules/user/types/user.types';
 
 export enum EAuthenticatedUser {
   ADMIN = 'admin',
@@ -22,4 +22,12 @@ export interface IUserRegistrationOptions {
   role: EUserRole;
   password: string;
   confirmPassword: string;
+}
+export interface ILoginOptions {
+  email: string;
+  password: string;
+  type: EAuthenticatedUser;
+}
+export interface IUserRegistrationOptions extends ISignUpOptions {
+  role: EUserRole;
 }

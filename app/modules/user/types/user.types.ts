@@ -24,3 +24,9 @@ export enum EUserRole {
   AUTHOR = 'author',
   READER = 'reader',
 }
+
+export interface IUniqueUserProperties {
+  id: string;
+  email: string;
+  phoneNumber: string;
+}
