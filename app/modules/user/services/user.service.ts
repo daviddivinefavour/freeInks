@@ -2,12 +2,12 @@ import { EUserRole, EUserStatus, ISignUpOptions, IUniqueUserProperties } from '.
 import { failingResult, passingResult } from '@app/utils/respond';
 import userRepo from '../repositories/user.repo';
 import { requestBodyValidator } from '@app/utils/validator';
-import { CreateUserSchema } from '../schemas/user.schema';
+import { UserRegistrationValidationSchema } from '../schemas/user.schema';
 import { v4 } from 'uuid';
 // import { IReturnFromService } from '@app/utils/types';
 
 const CreateUserService = async (createUserDto: ISignUpOptions, role: any) => {
-  const validatedDto = await requestBodyValidator({ payload: createUserDto, schema: CreateUserSchema });
+  const validatedDto = await requestBodyValidator({ payload: createUserDto, schema: UserRegistrationValidationSchema });
   if (!validatedDto.status) return failingResult(validatedDto.message);
 
   const userExists = await userRepo.SimpleFindOneUserQuery({ email: createUserDto.email });

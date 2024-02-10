@@ -1,4 +1,4 @@
-import { verifyJWTToken } from '@app/common/token';
+import token from '@app/common/token';
 import { EPermissions, TUserPermission } from '@app/modules/permission/types/permission.types';
 import userRepo from '@app/modules/user/repositories/user.repo';
 import { HTTP_401, HTTP_422 } from '@app/utils/http-response';
@@ -52,7 +52,7 @@ const authenticateUserRole = async (req: Request, userId: string, permission: st
 const authorizeClient = (permission: string) => async (req: Request, res: Response, next: NextFunction) => {
   const generatedToken = getBearerToken(req);
   if (!generatedToken.status) return sendHttpResponse(HTTP_422(generatedToken.message), res);
-  const validateToken = await verifyJWTToken(generatedToken.data as unknown as string);
+  const validateToken = await token.verifyJWTToken(generatedToken.data as unknown as string);
   if (!validateToken.status) return sendHttpResponse(HTTP_401(validateToken.message), res);
 
   const tokenData = JSON.parse(JSON.stringify(validateToken.data));

@@ -12,7 +12,7 @@ type TPayLoad = {
   email: string;
 };
 
-export const generateJWTToken = async (payLoad: TPayLoad, useClientSecretKey = true) => {
+const generateJWTToken = async (payLoad: TPayLoad, useClientSecretKey = true) => {
   try {
     const token = useClientSecretKey
       ? await new Promise((resolve, reject) => {
@@ -31,7 +31,7 @@ export const generateJWTToken = async (payLoad: TPayLoad, useClientSecretKey = t
   }
 };
 
-export const verifyJWTToken = async (token: string, useClientSecretKey = true) => {
+const verifyJWTToken = async (token: string, useClientSecretKey = true) => {
   try {
     const decodedToken = useClientSecretKey
       ? await new Promise((resolve, reject) => {

@@ -5,4 +5,5 @@ import { Router } from 'express';
 const router = Router();
 
 router.post('/user/register', use(authenticationController.SignUpAsClient));
+router.post('/user/login', use(authenticationController.LoginAsClient));
 export default router;
