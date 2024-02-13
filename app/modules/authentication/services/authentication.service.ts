@@ -3,7 +3,7 @@ import { EAuthenticatedUser, ILoginOptions, IUserRegistrationOptions } from '../
 import winston from 'winston';
 import authenticationRepo from '../repositories/authentication.repo';
 import userService from '@app/modules/user/services/user.service';
-import { HTTP_200, HTTP_201, HTTP_400, HTTP_401, HTTP_422 } from '@app/utils/http-response';
+import { HTTP_200, HTTP_201, HTTP_204, HTTP_400, HTTP_401, HTTP_422 } from '@app/utils/http-response';
 import { EUserRole } from '@app/modules/user/types/user.types';
 import userPermissionService from '@app/modules/permission/services/user-permission.service';
 import { EPermissions } from '@app/modules/permission/types/permission.types';
@@ -81,4 +81,9 @@ const LoginService = async (loginDto: ILoginOptions) => {
   return HTTP_200({ customMessage: 'Logged in successfully.', entity: { user: user.data, token: authToken.data } });
 };
 
-export default { UserRegistrationService, LoginService };
+const ForgotPasswordService = async (email: string) => {
+  const user = await userService.FindOneUserService({ email });
+  if (!user.status) return HTTP_422('Invalid credentials');
+  return HTTP_204('Successfully sent one time pin (OTP) to the provided email.');
+};
+export default { UserRegistrationService, LoginService, ForgotPasswordService };

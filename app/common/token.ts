@@ -3,9 +3,9 @@ import { HandleJwtTokenErrors } from '@app/utils/errors';
 import { passingResult } from '@app/utils/respond';
 import jwt from 'jsonwebtoken';
 
-const { CLIENT_JWT_SECRET, ADMIN_JWT_SECRET, JWT_TOKEN_EXPIRY } = process.env;
-
-if (!CLIENT_JWT_SECRET || !ADMIN_JWT_SECRET) throw Error('Invalid JWT SECRET');
+const ADMIN_JWT_SECRET = process.env.ADMIN_JWT_SECRET as unknown as string;
+const CLIENT_JWT_SECRET = process.env.CLIENT_JWT_SECRET as unknown as string;
+const JWT_TOKEN_EXPIRY = process.env.JWT_TOKEN_EXPIRY as unknown as string;
 
 type TPayLoad = {
   id: string;

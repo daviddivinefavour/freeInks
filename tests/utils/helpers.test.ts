@@ -1,9 +1,9 @@
 import { expect } from 'chai';
-import { generateRandomDigits } from '../../app/utils/helpers';
+import helpers from '../../app/utils/helpers';
 
 describe('generateRandomDigits()', () => {
   const num = 3;
-  const result = generateRandomDigits(num);
+  const result = helpers.generateRandomDigits(num);
   it('should generate random digits with correct length', () => {
     expect(result).to.be.a('number');
     expect(result.toString().length).to.equal(num);

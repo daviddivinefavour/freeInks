@@ -32,4 +32,11 @@ const LoginAsClient = async (req: Request, res: Response): Promise<Response> => 
   return sendHttpResponse(serviceResponse, res);
 };
 
-export default { SignUpAsClient, LoginAsClient };
+const ForgotPassword = async (req: Request, res: Response): Promise<Response> => {
+  const { email } = req.body;
+
+  const serviceResponse = await authenticationService.ForgotPasswordService(email);
+
+  return sendHttpResponse(serviceResponse, res);
+};
+export default { SignUpAsClient, LoginAsClient, ForgotPassword };

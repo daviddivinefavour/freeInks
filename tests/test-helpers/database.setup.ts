@@ -1,6 +1,6 @@
 import { exec } from 'child_process';
 import util from 'util';
-import { db as sequelize } from '../../src/config/database';
+import { db as sequelize } from '../../app/config/database';
 
 const execute = util.promisify(exec);
 
@@ -85,7 +85,7 @@ const clearSeederJsonForTestDatabase = async () => {
   }
 };
 
-export {
+export default {
   testDatabaseConnection,
   dropAllMigrationsForTestDatabase,
   runMigrationsForTestDatabase,

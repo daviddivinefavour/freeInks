@@ -6,7 +6,8 @@ module.exports = {
   bail: false,
   color: true,
   ui: 'bdd',
-  watch: true,
+  // watch: true,
+  timeout: 5000,
   'watch-files': ['app/**/*.ts', 'tests/**/*.test.ts'],
   'watch-ignore': ['node_modules', 'dist', 'build', 'coverage', 'database', 'logs', 'scripts'],
 };

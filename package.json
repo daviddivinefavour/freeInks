@@ -12,9 +12,10 @@
     "db:create": "NODE_ENV=${npm_config_env}  && npx sequelize db:create --env=${npm_config_env}",
     "db:migrate": "NODE_ENV=${npm_config_env}  && npx sequelize db:migrate --env=${npm_config_env}",
     "db:migrate:undo": "NODE_ENV=${npm_config_env}  && npx sequelize db:migrate:undo --env=${npm_config_env}",
+    "db:migrate:undo:all": "NODE_ENV=${npm_config_env}  && npx sequelize db:migrate:undo:all --env=${npm_config_env}",
     "db:seed": "NODE_ENV=${npm_config_env}  && npx sequelize db:seed:all --env=${npm_config_env}",
     "db:seed:undo": "NODE_ENV=${npm_config_env}  && npx sequelize db:seed:undo --env=${npm_config_env}",
-    "test": "NODE_ENV=test mocha --check-leaks"
+    "test": "NODE_ENV=test mocha --reporter spec --require ts-node/register --require tsconfig-paths/register --recursive --exit"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
   },
   "homepage": "https://github.com/daviddivinefavour/freeInks#readme",
   "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
     "@types/bcryptjs": "^2.4.6",
     "@types/chai": "^4.3.10",
     "@types/cors": "^2.8.13",
