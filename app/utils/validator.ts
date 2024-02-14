@@ -1,13 +1,16 @@
 import { validationError } from './errors';
-import { passingResult } from './respond';
-import { ObjectSchema } from 'yup';
+import { failingResult, passingResult } from './respond';
+import { ObjectSchema, ValidationError } from 'yup';
 
 interface IValidatorOptions {
   schema: ObjectSchema<any>;
   payload: any;
 }
-export const requestBodyValidator = ({ schema, payload }: IValidatorOptions) =>
-  schema
-    .validate(payload)
-    .then(res => passingResult('Validation successful', res))
-    .catch(error => validationError(error));
+export const requestBodyValidator = async ({ schema, payload }: IValidatorOptions) => {
+  try {
+    const validatedData = await schema.validate(payload);
+    return passingResult('Validation successful', validatedData);
+  } catch (error) {
+    return failingResult(validationError(error as ValidationError).message);
+  }
+};

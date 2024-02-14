@@ -64,7 +64,7 @@ const LoginService = async (loginDto: ILoginOptions) => {
   const validatedDto = await requestBodyValidator({ payload: loginDto, schema: LoginValidationSchema });
   if (!validatedDto.status) return HTTP_400(validatedDto.message);
 
-  const user = await userService.FindOneUserService({ email: loginDto.email });
+  const user = await userService.FindOneUserService({ email: validatedDto.data.email });
   if (!user.status) return HTTP_422(user.message);
 
   const authUser = await authenticationRepo.GetAuthenticationQuery(user.data?.id);
@@ -74,7 +74,7 @@ const LoginService = async (loginDto: ILoginOptions) => {
   // generate auth token
   const authToken = await token.generateJWTToken({
     id: user.data?.id,
-    email: loginDto.email,
+    email: validatedDto.data.email,
   });
   if (!authToken.status) return HTTP_401(authToken.message);
 

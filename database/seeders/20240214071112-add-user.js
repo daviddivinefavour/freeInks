@@ -8,7 +8,7 @@ const users = [
     id: '0a23c596-39a2-433d-8319-5cc9896d794e',
     first_name: 'Johnny',
     last_name: 'English',
-    email: 'English@example.com',
+    email: 'english@example.com',
     phone_number: '09099900999',
     is_email_verified: true,
     verified_at: '2024-02-09T18:39:07.918Z',

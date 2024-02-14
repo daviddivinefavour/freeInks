@@ -3,7 +3,11 @@ import * as yup from 'yup';
 export const UserRegistrationValidationSchema = yup.object().shape({
   firstName: yup.string().required(),
   lastName: yup.string().required(),
-  email: yup.string().email().required(),
+  email: yup
+    .string()
+    .email()
+    .required()
+    .transform(value => value.toLowerCase()),
   phoneNumber: yup.string().notRequired().nullable(),
   password: yup.string().min(8).required().nullable(),
   confirmPassword: yup
