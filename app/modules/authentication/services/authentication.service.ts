@@ -84,6 +84,10 @@ const LoginService = async (loginDto: ILoginOptions) => {
 const ForgotPasswordService = async (email: string) => {
   const user = await userService.FindOneUserService({ email });
   if (!user.status) return HTTP_422('Invalid credentials');
+
+  /*
+   *logic to create otp tied to user and send to users email
+   */
   return HTTP_204('Successfully sent one time pin (OTP) to the provided email.');
 };
 export default { UserRegistrationService, LoginService, ForgotPasswordService };
