@@ -1,3 +1,5 @@
+import User from '../../../app/modules/user/models/user.model';
+
 export default [
   {
     id: '0a23c596-39a2-433d-8319-5cc9896d794e',
@@ -14,5 +16,5 @@ export default [
     created_at: '2024-02-09T18:36:07.918Z',
     updated_at: '2024-02-09T18:36:07.918Z',
     deleted_at: null,
-  },
+  } as unknown as User,
 ];
