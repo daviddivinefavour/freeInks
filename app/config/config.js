@@ -1,6 +1,5 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+/* eslint-disable @typescript-eslint/no-var-requires */
 const dotenv = require('dotenv');
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require('path');
 dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 

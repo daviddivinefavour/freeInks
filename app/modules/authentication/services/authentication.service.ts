@@ -11,6 +11,7 @@ import { LoginValidationSchema } from '../schemas/authentication.schema';
 import { requestBodyValidator } from '@app/utils/validator';
 import helpers from '@app/utils/helpers';
 import token from '@app/common/token';
+import otpService from '@app/modules/otp/services/otp.service';
 
 const UserRegistrationService = async (userRegistrationDto: IUserRegistrationOptions) => {
   const { role, ...otherRegistrationDto } = userRegistrationDto;
@@ -84,6 +85,9 @@ const LoginService = async (loginDto: ILoginOptions) => {
 const ForgotPasswordService = async (email: string) => {
   const user = await userService.FindOneUserService({ email });
   if (!user.status) return HTTP_422('Invalid credentials');
+
+  const otp = await otpService.CreateOtpService(user.data?.id);
+  if (!otp.status) return HTTP_422(otp.message);
 
   /*
    *logic to create otp tied to user and send to users email
